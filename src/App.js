@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, SafeAreaView, Alert } from 'react-native';
+import { View,  FlatList, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { style } from './App_style';
 
 import Header from './components/header/header';
 import TodoItem from './components/todoitem/todoitem';
 import AddTodo from './components/addtodo/addtodo';
+import Sandbox from './components/sandbox/sandboxitem';
 
 export default function App() {
   const [todos, setTodos] = useState([
@@ -32,18 +33,29 @@ export default function App() {
       Alert.alert('Heyy!',
                   'Your message too short!',
                   [ 
-                    {text: 'OK', onPress:()=> alert('OK')}
+                    {text: 'Yes', onPress:()=> alert('Yes')},
+                    {text: 'No', onPress:()=> alert('No')},
+                    {text: 'Cancel', onPress:()=> alert('Cancel')},
+                    // En fazla 3 buton gösteriliyor.
+                    // {text: 'Button2', onPress:()=> alert('Button2')},
+                    // {text: 'Button3', onPress:()=> alert('Button3')},
+                    // {text: 'Button4', onPress:()=> alert('Button4')}
                   ])
     }
   }
 
   return (
+    // <Sandbox />
+    <TouchableWithoutFeedback onPress={()=>{
+      //Böylece klavye açıkken herhangi bir noktaya dokunulursa 
+      //klavye otomatik kapanır. Her türlü işlem yapılabilir.
+      Keyboard.dismiss();
+    }}>
+
     <View style={style.container}>
-      <SafeAreaView>
           {/** header */}
           <Header />
           {/** header */}
-
         <View style={style.content}>
           {/** todoform */}
           <AddTodo submitHandler={submitHandler} />
@@ -56,7 +68,7 @@ export default function App() {
                       )}/>
           </View>
         </View>
-      </SafeAreaView>
     </View>
+    </TouchableWithoutFeedback>
   )
 }

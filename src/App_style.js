@@ -6,9 +6,11 @@ const style = StyleSheet.create({
         backgroundColor:"#fff",
     },
     content:{
-        padding:20,
+        flex:1,
+        padding:40,
     },
     list:{
+        flex:1,
         marginTop:20,
     }
 });
